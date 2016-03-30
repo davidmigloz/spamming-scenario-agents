@@ -9,16 +9,16 @@ import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
 
 /**
  * Experiment Master Agent (EMA). Initializes the experiment sending START
  * message to all SA's and measures the total time of processing all messages by
- * all MCA's.
+ * all MCA's. The name of the agent must be 'EMA'.
  */
 public class EMA extends Agent {
 
+	private static final long serialVersionUID = 570376489866952222L;
 	private final Logger logger = Logger.getMyLogger(getClass().getName());
 
 	public final static String DONE = "done";
@@ -30,6 +30,8 @@ public class EMA extends Agent {
 	@Override
 	protected void setup() {
 		addBehaviour(new OneShotBehaviour(this) {
+			private static final long serialVersionUID = 1582761767744710850L;
+
 			@Override
 			public void action() {
 				// Get list of spammer agents
@@ -51,7 +53,7 @@ public class EMA extends Agent {
 				ACLMessage startMsg = new ACLMessage(ACLMessage.REQUEST);
 				for (int i = 0; i < SAs.length; ++i) {
 					startMsg.addReceiver(SAs[i]);
-				} 
+				}
 				startMsg.setContent(EMA.START);
 				myAgent.send(startMsg);
 			}
