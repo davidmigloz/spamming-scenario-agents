@@ -8,6 +8,8 @@ import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
 
 /**
@@ -45,7 +47,29 @@ public class EMA extends Agent {
 				} catch (FIPAException e) {
 					logger.log(Logger.SEVERE, "Cannot get spammer agents", e);
 				}
+				// Send START message to all SA's
+				ACLMessage startMsg = new ACLMessage(ACLMessage.REQUEST);
+				for (int i = 0; i < SAs.length; ++i) {
+					startMsg.addReceiver(SAs[i]);
+				} 
+				startMsg.setContent(EMA.START);
+				myAgent.send(startMsg);
 			}
 		});
+	}
+
+	private class RequestPerformer extends Behaviour {
+		private int step = 0;
+
+		@Override
+		public void action() {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public boolean done() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 	}
 }
