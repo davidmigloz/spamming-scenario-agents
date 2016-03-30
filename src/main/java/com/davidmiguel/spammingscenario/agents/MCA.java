@@ -14,16 +14,16 @@ import jade.util.Logger;
  */
 public class MCA extends Agent {
 
-	private Logger logger = Logger.getMyLogger(getClass().getName());
+	private final Logger logger = Logger.getMyLogger(getClass().getName());
 
 	@Override
 	protected void setup() {
 		// Register the message consuming service in the yellow pages
-		DFAgentDescription dfd = new DFAgentDescription();
-		dfd.setName(getAID());
 		ServiceDescription sd = new ServiceDescription();
 		sd.setType("MCA");
-		sd.setName("spamming-scenario");
+		sd.setName("MCAService");
+		DFAgentDescription dfd = new DFAgentDescription();
+		dfd.setName(getAID());
 		dfd.addServices(sd);
 		try {
 			DFService.register(this, dfd);
