@@ -2,7 +2,6 @@ package com.davidmiguel.spammingscenario.agents;
 
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -18,8 +17,8 @@ import jade.util.Logger;
  */
 public class EMA extends Agent {
 
-	private static final long serialVersionUID = 570376489866952222L;
 	private final Logger logger = Logger.getMyLogger(getClass().getName());
+	private static final long serialVersionUID = 570376489866952222L;
 
 	public final static String DONE = "done";
 	public final static String START = "start";
@@ -36,7 +35,7 @@ public class EMA extends Agent {
 			public void action() {
 				// Get list of spammer agents
 				ServiceDescription sd = new ServiceDescription();
-				sd.setType("MCA");
+				sd.setType("SA");
 				DFAgentDescription dfd = new DFAgentDescription();
 				dfd.addServices(sd);
 				try {
@@ -58,20 +57,5 @@ public class EMA extends Agent {
 				myAgent.send(startMsg);
 			}
 		});
-	}
-
-	private class RequestPerformer extends Behaviour {
-		private int step = 0;
-
-		@Override
-		public void action() {
-			// TODO Auto-generated method stub
-		}
-
-		@Override
-		public boolean done() {
-			// TODO Auto-generated method stub
-			return false;
-		}
 	}
 }
