@@ -1,6 +1,11 @@
 package com.davidmiguel.spammingscenario.agents;
 
 import jade.core.Agent;
+import jade.domain.DFService;
+import jade.domain.FIPAException;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.util.Logger;
 
 /**
  * Message Consuming Agent (MCA). Receives and processes the messages sent by
@@ -9,9 +14,22 @@ import jade.core.Agent;
  */
 public class MCA extends Agent {
 
+	private Logger logger = Logger.getMyLogger(getClass().getName());
+
 	@Override
 	protected void setup() {
-		System.out.println("Hello World! My name is " + getLocalName());
-		doDelete();
+		// Register the message consuming service in the yellow pages
+		DFAgentDescription dfd = new DFAgentDescription();
+		dfd.setName(getAID());
+		ServiceDescription sd = new ServiceDescription();
+		sd.setType("MCA");
+		sd.setName("spamming-scenario");
+		dfd.addServices(sd);
+		try {
+			DFService.register(this, dfd);
+		} catch (FIPAException e) {
+			logger.log(Logger.SEVERE, "Agent " + getLocalName() + " - Cannot register with DF", e);
+			doDelete();
+		}
 	}
 }
