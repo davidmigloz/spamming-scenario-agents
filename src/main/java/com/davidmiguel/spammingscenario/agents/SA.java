@@ -12,15 +12,32 @@ import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
 
 /**
- * Spammer Agent (SA). Sends N messages of size M to all MCS's.
+ * Spammer Agent (SA). Sends N messages of size M to all MCS's. 
+ * Run: 
+ * java jade.Boot -gui sax:com.davidmiguel.spammingscenario.agents(N, M) 
+ * - N: number of messages. 
+ * - M: size of each message.
  */
 public class SA extends Agent {
 
 	private final Logger logger = Logger.getMyLogger(getClass().getName());
 	private static final long serialVersionUID = -3669628420932251804L;
 
+	private int n;
+	private int m;
+
 	@Override
 	protected void setup() {
+		// Get number of messages to send and its size
+		Object[] args = getArguments();
+		if (args != null && args.length == 2) {
+			n = Integer.parseInt((String) args[0]);
+			m = Integer.parseInt((String) args[1]);
+			logger.log(Logger.INFO, "Agent " + getLocalName() + " - Target: " + n + " msg / " + m + " size");
+		} else {
+			logger.log(Logger.SEVERE, "Agent " + getLocalName() + " - Incorrect number of arguments");
+			doDelete();
+		}
 		// Register the spamming service in the yellow pages
 		ServiceDescription sd = new ServiceDescription();
 		sd.setType("SA");
@@ -47,7 +64,7 @@ public class SA extends Agent {
 				if (msg != null) {
 					// Start spamming MCA's
 					start = true;
-					System.out.println("I can spam ha ha ha");
+					System.out.println("Spamming: " + n + " msg / " + n + " size");
 				} else {
 					block();
 				}
