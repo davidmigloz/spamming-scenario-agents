@@ -1,8 +1,8 @@
-
 # Created by https://www.gitignore.io/api/java,eclipse,maven,intellij
 
 ### Logs ###
 *.log
+
 
 ### Java ###
 *.class
@@ -20,7 +20,6 @@ hs_err_pid*
 
 
 ### Eclipse ###
-
 .metadata
 bin/
 tmp/
@@ -129,3 +128,8 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+### JADE ###
+APDescription.txt
+MTPs-Main-Container.txt
+dependency-reduced-pom.xml
