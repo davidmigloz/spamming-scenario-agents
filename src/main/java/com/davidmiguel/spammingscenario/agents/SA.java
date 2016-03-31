@@ -14,7 +14,7 @@ import jade.util.Logger;
 /**
  * Spammer Agent (SA). Sends N messages of size M to all MCS's. 
  * Run: 
- * java jade.Boot -gui sax:com.davidmiguel.spammingscenario.agents(N, M) 
+ * java jade.Boot -gui SAx:com.davidmiguel.spammingscenario.agents.SA(N, M) 
  * - N: number of messages. 
  * - M: size of each message.
  */
