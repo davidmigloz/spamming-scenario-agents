@@ -2,12 +2,14 @@ package com.davidmiguel.spammingscenario.agents;
 
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.Behaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
 
 /**
@@ -23,8 +25,10 @@ public class EMA extends Agent {
 	public final static String DONE = "done";
 	public final static String START = "start";
 
-	// List of known Spammer Agents(SA)
+	/** List of known Spammer Agents(SA) */
 	private AID[] SAs;
+	/** Number of MCS's */
+	private int nMCAs;
 
 	@Override
 	protected void setup() {
@@ -48,6 +52,17 @@ public class EMA extends Agent {
 				} catch (FIPAException e) {
 					logger.log(Logger.SEVERE, "Cannot get SA's", e);
 				}
+				// Get number of Message Consuming Agents (MCA)
+				sd = new ServiceDescription();
+				sd.setType("MCA");
+				dfd = new DFAgentDescription();
+				dfd.addServices(sd);
+				try {
+					DFAgentDescription[] result = DFService.search(myAgent, dfd);
+					nMCAs = result.length;
+				} catch (FIPAException e) {
+					logger.log(Logger.SEVERE, "Cannot get MCA's", e);
+				}
 				// Send START message to all SA's
 				ACLMessage startMsg = new ACLMessage(ACLMessage.REQUEST);
 				for (int i = 0; i < SAs.length; ++i) {
@@ -55,7 +70,43 @@ public class EMA extends Agent {
 				}
 				startMsg.setContent(EMA.START);
 				myAgent.send(startMsg);
+				// Add the behaviour listen to done messages
+				addBehaviour(new ListenDoneMessagesBehaviour());
 			}
 		});
+	}
+
+	private class ListenDoneMessagesBehaviour extends Behaviour {
+
+		private static final long serialVersionUID = 4075092804919487501L;
+		private int done;
+
+		public ListenDoneMessagesBehaviour() {
+			super();
+			done = 0;
+		}
+
+		@Override
+		public void action() {
+			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
+					MessageTemplate.MatchContent(EMA.DONE));
+			ACLMessage msg = myAgent.receive(mt);
+			if (msg != null) {
+				++done;
+			} else {
+				block();
+			}
+		}
+
+		@Override
+		public boolean done() {
+			return done == nMCAs;
+		}
+
+		@Override
+		public int onEnd() {
+			System.out.println("I'm done!!!");
+			return 0;
+		}
 	}
 }

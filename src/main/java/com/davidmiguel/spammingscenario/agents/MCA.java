@@ -21,6 +21,7 @@ import jade.util.Logger;
  * Run:
  * java jade.Boot -gui MCAx:com.davidmiguel.spammingscenario.agents.MCA(N) 
  * - N: number of messages to receive from each SA.
+ * Note: Spammer Agentes (SA's) must be running befoure run MCA's.
  */
 public class MCA extends Agent {
 
