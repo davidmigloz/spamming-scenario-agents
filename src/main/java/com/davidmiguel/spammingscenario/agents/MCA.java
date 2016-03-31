@@ -3,6 +3,7 @@ package com.davidmiguel.spammingscenario.agents;
 import java.util.HashMap;
 import java.util.Map;
 
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.Behaviour;
 import jade.domain.DFService;
@@ -111,6 +112,11 @@ public class MCA extends Agent {
 					return false;
 				}
 			}
+			// Send DONE message to EMA
+			ACLMessage doneMsg = new ACLMessage(ACLMessage.INFORM);
+			doneMsg.addReceiver(new AID("EMA", AID.ISLOCALNAME));
+			doneMsg.setContent(EMA.DONE);
+			myAgent.send(doneMsg);
 			return true;
 		}
 	}
