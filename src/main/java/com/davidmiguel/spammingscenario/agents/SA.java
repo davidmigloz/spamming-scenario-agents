@@ -2,6 +2,7 @@ package com.davidmiguel.spammingscenario.agents;
 
 import jade.core.AID;
 import jade.core.Agent;
+import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
@@ -13,8 +14,8 @@ import jade.util.Logger;
 
 /**
  * Spammer Agent (SA). Sends N messages of size M to all MCS's. 
- * Run: 
- * java jade.Boot -gui SAx:com.davidmiguel.spammingscenario.agents.SA(N, M) 
+ * Run: java
+ * jade.Boot -gui SAx:com.davidmiguel.spammingscenario.agents.SA(N, M) 
  * - N: number of messages. 
  * - M: size of each message.
  */
@@ -63,8 +64,8 @@ public class SA extends Agent {
 				ACLMessage msg = myAgent.receive(mt);
 				if (msg != null) {
 					// Start spamming MCA's
+					myAgent.addBehaviour(new SpammerBehaviour());
 					start = true;
-					System.out.println("Spamming: " + n + " msg / " + n + " size");
 				} else {
 					block();
 				}
@@ -75,5 +76,49 @@ public class SA extends Agent {
 				return start;
 			}
 		});
+	}
+
+	/**
+	 * Sends N messages of size M to each MCA of the platform.
+	 */
+	private class SpammerBehaviour extends OneShotBehaviour {
+
+		private static final long serialVersionUID = -8492387448755961987L;
+		// List of known Message Consuming Agents (MCA)
+		private AID[] MCAs;
+
+		@Override
+		public void action() {
+			System.out.println("Spamming: " + n + " msg / " + m + " size");
+			// Get list of Message Consuming Agents (MCA)
+			ServiceDescription sd = new ServiceDescription();
+			sd.setType("MCA");
+			DFAgentDescription dfd = new DFAgentDescription();
+			dfd.addServices(sd);
+			try {
+				DFAgentDescription[] result = DFService.search(myAgent, dfd);
+				logger.log(Logger.INFO, "Found " + result.length + " MCA's");
+				MCAs = new AID[result.length];
+				for (int i = 0; i < result.length; ++i) {
+					MCAs[i] = result[i].getName();
+				}
+			} catch (FIPAException e) {
+				logger.log(Logger.SEVERE, "Cannot get MCA's", e);
+			}
+			// Generate message to spam
+			String content = "";
+			for (int i = 0; i < m; i++) {
+				content += "A";
+			}
+			ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+			for (int i = 0; i < MCAs.length; ++i) {
+				msg.addReceiver(MCAs[i]);
+			}
+			msg.setContent(content);
+			// Send message n times
+			for (int i = 0; i < n; i++) {
+				myAgent.send(msg);
+			}
+		}
 	}
 }

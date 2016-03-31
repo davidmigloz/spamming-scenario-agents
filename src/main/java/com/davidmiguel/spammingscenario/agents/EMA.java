@@ -23,7 +23,7 @@ public class EMA extends Agent {
 	public final static String DONE = "done";
 	public final static String START = "start";
 
-	// The list of known spammer agents
+	// List of known Spammer Agents(SA)
 	private AID[] SAs;
 
 	@Override
@@ -33,20 +33,20 @@ public class EMA extends Agent {
 
 			@Override
 			public void action() {
-				// Get list of spammer agents
+				// Get list of Spammer Agents (SA)
 				ServiceDescription sd = new ServiceDescription();
 				sd.setType("SA");
 				DFAgentDescription dfd = new DFAgentDescription();
 				dfd.addServices(sd);
 				try {
 					DFAgentDescription[] result = DFService.search(myAgent, dfd);
-					logger.log(Logger.INFO, "Found " + result.length + " spammer agents");
+					logger.log(Logger.INFO, "Found " + result.length + " SA's");
 					SAs = new AID[result.length];
 					for (int i = 0; i < result.length; ++i) {
 						SAs[i] = result[i].getName();
 					}
 				} catch (FIPAException e) {
-					logger.log(Logger.SEVERE, "Cannot get spammer agents", e);
+					logger.log(Logger.SEVERE, "Cannot get SA's", e);
 				}
 				// Send START message to all SA's
 				ACLMessage startMsg = new ACLMessage(ACLMessage.REQUEST);
