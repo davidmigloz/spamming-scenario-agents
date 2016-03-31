@@ -24,6 +24,8 @@ public class SA extends Agent {
 	private final Logger logger = Logger.getMyLogger(getClass().getName());
 	private static final long serialVersionUID = -3669628420932251804L;
 
+	public final static String LANG = "spam";
+	
 	private int n;
 	private int m;
 
@@ -89,7 +91,6 @@ public class SA extends Agent {
 
 		@Override
 		public void action() {
-			System.out.println("Spamming: " + n + " msg / " + m + " size");
 			// Get list of Message Consuming Agents (MCA)
 			ServiceDescription sd = new ServiceDescription();
 			sd.setType("MCA");
@@ -115,6 +116,7 @@ public class SA extends Agent {
 				msg.addReceiver(MCAs[i]);
 			}
 			msg.setContent(content);
+			msg.setLanguage(LANG);
 			// Send message n times
 			for (int i = 0; i < n; i++) {
 				myAgent.send(msg);
