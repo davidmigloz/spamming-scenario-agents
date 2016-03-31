@@ -13,10 +13,11 @@ import jade.lang.acl.MessageTemplate;
 import jade.util.Logger;
 
 /**
- * Spammer Agent (SA). Sends N messages of size M to all MCS's. 
- * Run: java
- * jade.Boot -gui SAx:com.davidmiguel.spammingscenario.agents.SA(N, M) 
- * - N: number of messages. 
+ * Spammer Agent (SA). Sends N messages of size M to all MCS's when it receives
+ * a START message from EMA. 
+ * Run: 
+ * java jade.Boot -container SAx:com.davidmiguel.spammingscenario.agents.SA(N, M) 
+ * - N: number of messages.
  * - M: size of each message.
  */
 public class SA extends Agent {
@@ -24,9 +25,11 @@ public class SA extends Agent {
 	private final Logger logger = Logger.getMyLogger(getClass().getName());
 	private static final long serialVersionUID = -3669628420932251804L;
 
-	public final static String LANG = "spam";
-	
+	public final static String LANGUAGE = "spam";
+
+	/** Number of messages sent by each SA */
 	private int n;
+	/** Size of each message */
 	private int m;
 
 	@Override
@@ -86,7 +89,7 @@ public class SA extends Agent {
 	private class SpammerBehaviour extends OneShotBehaviour {
 
 		private static final long serialVersionUID = -8492387448755961987L;
-		// List of known Message Consuming Agents (MCA)
+		/** List of known Message Consuming Agents (MCA) */
 		private AID[] MCAs;
 
 		@Override
@@ -116,7 +119,7 @@ public class SA extends Agent {
 				msg.addReceiver(MCAs[i]);
 			}
 			msg.setContent(content);
-			msg.setLanguage(LANG);
+			msg.setLanguage(LANGUAGE);
 			// Send message n times
 			for (int i = 0; i < n; i++) {
 				myAgent.send(msg);

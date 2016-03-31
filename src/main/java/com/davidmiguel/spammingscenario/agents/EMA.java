@@ -15,7 +15,10 @@ import jade.util.Logger;
 /**
  * Experiment Master Agent (EMA). Initializes the experiment sending START
  * message to all SA's and measures the total time of processing all messages by
- * all MCA's. The name of the agent must be 'EMA'.
+ * all MCA's. 
+ * Run: 
+ * java jade.Boot -container EMA:com.davidmiguel.spammingscenario.agents.EMA()
+ * Note: The name of the agent must be 'EMA'. 
  */
 public class EMA extends Agent {
 
@@ -27,8 +30,10 @@ public class EMA extends Agent {
 
 	/** List of known Spammer Agents(SA) */
 	private AID[] SAs;
-	/** Number of MCS's */
+	/** Number of message consuming agents (MCA) */
 	private int nMCAs;
+	/** Initial time */
+	private long tIni;
 
 	@Override
 	protected void setup() {
@@ -70,15 +75,22 @@ public class EMA extends Agent {
 				}
 				startMsg.setContent(EMA.START);
 				myAgent.send(startMsg);
+				// Start timer
+				tIni = System.currentTimeMillis();
 				// Add the behaviour listen to done messages
 				addBehaviour(new ListenDoneMessagesBehaviour());
 			}
 		});
 	}
 
+	/**
+	 * Listen to done messages and stop timer when all messages have been
+	 * received.
+	 */
 	private class ListenDoneMessagesBehaviour extends Behaviour {
 
 		private static final long serialVersionUID = 4075092804919487501L;
+		/** Number of MCA's that have finished */
 		private int done;
 
 		public ListenDoneMessagesBehaviour() {
@@ -88,6 +100,7 @@ public class EMA extends Agent {
 
 		@Override
 		public void action() {
+			// Receive DONE messages
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
 					MessageTemplate.MatchContent(EMA.DONE));
 			ACLMessage msg = myAgent.receive(mt);
@@ -100,12 +113,15 @@ public class EMA extends Agent {
 
 		@Override
 		public boolean done() {
+			// When all MCA have sent DONE message, we are done
 			return done == nMCAs;
 		}
 
 		@Override
 		public int onEnd() {
-			System.out.println("I'm done!!!");
+			// Print execution time
+			long tFin = System.currentTimeMillis() - tIni;
+			System.out.println("Execution time: " + tFin + "ms");
 			return 0;
 		}
 	}

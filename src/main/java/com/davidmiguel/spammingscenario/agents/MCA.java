@@ -16,11 +16,11 @@ import jade.util.Logger;
 
 /**
  * Message Consuming Agent (MCA). Receives and processes the messages sent by
- * SA's. When all messages have been processed, it sends message "done" to the
+ * SA's. When all messages have been processed, it sends message DONE to the
  * EMA. It knows how many messages from each SA should receive. 
- * Run:
- * java jade.Boot -gui MCAx:com.davidmiguel.spammingscenario.agents.MCA(N) 
- * - N: number of messages to receive from each SA.
+ * Run: 
+ * java jade.Boot -container MCAx:com.davidmiguel.spammingscenario.agents.MCA(N) 
+ * - N: number of messages to receive from each SA. 
  * Note: Spammer Agentes (SA's) must be running befoure run MCA's.
  */
 public class MCA extends Agent {
@@ -28,8 +28,10 @@ public class MCA extends Agent {
 	private final Logger logger = Logger.getMyLogger(getClass().getName());
 	private static final long serialVersionUID = 9085335745014921813L;
 
+	/** Number of messages sent by each SA */
 	private int n;
-	private int nSAs; // Number SA's
+	/** Number SA's */
+	private int nSAs;
 
 	@Override
 	protected void setup() {
@@ -70,11 +72,15 @@ public class MCA extends Agent {
 		addBehaviour(new MessageConsumingBehaviour());
 	}
 
+	/**
+	 * Receive and process each message sent by Spammer Agents. Send DONE
+	 * message to EMA when all messages have been received.
+	 */
 	private class MessageConsumingBehaviour extends Behaviour {
 
 		private static final long serialVersionUID = -5860119910249641199L;
-
-		private Map<String, Integer> received; // SA -> nº of msg received
+		/** SA -> nº of msg received by it */
+		private Map<String, Integer> received; //
 
 		public MessageConsumingBehaviour() {
 			super();
@@ -83,8 +89,9 @@ public class MCA extends Agent {
 
 		@Override
 		public void action() {
+			// Receive spam messages
 			MessageTemplate mt = MessageTemplate.and(MessageTemplate.MatchPerformative(ACLMessage.INFORM),
-					MessageTemplate.MatchLanguage(SA.LANG));
+					MessageTemplate.MatchLanguage(SA.LANGUAGE));
 			ACLMessage msg = myAgent.receive(mt);
 			if (msg != null) {
 				// Process message
