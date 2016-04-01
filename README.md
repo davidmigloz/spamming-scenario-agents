@@ -43,6 +43,7 @@ We run the experiment sending 50 messages of 300 ASCII characters. Each containe
 | 5                    	| 12067               	|
 | 6                    	| 17862               	|
 
+![enter image description here](https://raw.githubusercontent.com/davidmigloz/spamming-scenario-agents/master/doc/img/1a.jpg)
 
 ### B) Varying message size (M)
 
@@ -57,6 +58,7 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 | 1000             	| 11037               	|
 | 5000             	| 49241               	|
 
+![enter image description here](https://github.com/davidmigloz/spamming-scenario-agents/blob/master/doc/img/1b.jpg)
 
 ### C) Varying number of messages sent by SA's (N)
 
@@ -71,6 +73,7 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 | 1000                   	| 85873               	|
 | 5000                   	| 427583              	|
 
+![enter image description here](https://raw.githubusercontent.com/davidmigloz/spamming-scenario-agents/master/doc/img/1c.jpg)
 
 ### Part 2
 
