@@ -68,3 +68,5 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 ## References
 
+ [1]: Krzysztof Chmiel, Maciej Gawinecki, Pawel Kaczmarek, Michal Szymczak, Marcin  Paprzycki, Efficiency of JADE agent platform. Scientific Programming vol. 13, no. 2, 2005, 159-172.
+ [2]: Krzysztof Chmiel, Maciej Gawinecki, Pawel Kaczmarek, Michal Szymczak, Marcin  Paprzycki, Efficiency of JADE agent platform. Scientific Programming vol. 13, no. 2, 2005, 159-172.
