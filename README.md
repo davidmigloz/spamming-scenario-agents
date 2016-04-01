@@ -16,13 +16,23 @@ The scenario is designed to flood the system with messages. It has three types o
 - **Message Consuming Agent (MCA):** receives and processes the messages sent by SA's. When all messages have been processed, it sends message `DONE` to the EMA. It knows how many messages from each SA should receive. 
 - **Experiment Master Agent (EMA):** initializes the experiment sending `START`  message to all SA's and measures the total time of processing all messages by all MCA's. 
 
+![enter image description here](https://raw.githubusercontent.com/davidmigloz/spamming-scenario-agents/master/doc/img/scenario.jpg "Scenario")
+
+Each container hosts a pair of agents SA-MCA. 
+
+EMA is located in the Main Container.
 
 ## Testing
 
+#### Environment
+The tests was performed in a Toshiba Satellite L850-150 laptop, with an Intel i7-3610 QM proccesor running at 2.30GHz and 8Gb of RAM.
+
 ### Part 1
 
+Three types of tests were performed, each one modifying one variable.
+
 ### A) Varying number of containers
-We run the experiment sending 50 messages of 300 ASCII characters. Each container contains a pair of agents (SA-MCA).
+We run the experiment sending 50 messages of 300 ASCII characters. Each container contains a pair of agents (SA-MCA) and EMA in the Main Container.
 
 | Number of containers 	| Execution time (ms) 	|
 |----------------------	|---------------------	|
@@ -64,7 +74,46 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 ### Part 2
 
+In this second part, the way that Message Consuming Agent (MCA) consumes the messages was modified: 
+
+It looks for a message from a specific Spammer Agent (SA) first, and when there are none, it precesses the remaining messages in FIFO order.
+
+We repeated the same tests with these modification, but giving priority to the messages of the `SA1`.
+
+### A) Varying number of containers
+We run the experiment sending 50 messages of 300 ASCII characters. Each container contains a pair of agents (SA-MCA) and EMA in the Main Container.
+
+| Number of containers 	| Execution time (ms) 	|
+|----------------------	|---------------------	|
+| 1                    	| 456                 	|
+| 2                    	| 1867                	|
+| 3                    	| 4189                	|
+
+
+### B) Varying message size (M)
+
+We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The number of messages sent by each SA was 50.
+
+| Message Size (M) 	| Execution time (ms) 	|
+|------------------	|---------------------	|
+| 10               	| 1611                	|
+| 50               	| 1924                	|
+| 100              	| 2386                	|
+
+
+### C) Varying number of messages sent by SA's (N)
+
+We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The message size was 300 ASCII characters.
+
+| Number of messages (N) 	| Execution time (ms) 	|
+|------------------------	|---------------------	|
+| 10                     	| 868                 	|
+| 50                     	| 4304                	|
+| 100                    	| 8551                	|
+
 ## Conclusions
+
+
 
 ## References
 
