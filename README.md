@@ -86,33 +86,33 @@ We repeated the same tests with these modification, but giving priority to the m
 ### A) Varying number of containers
 We run the experiment sending 50 messages of 300 ASCII characters. Each container contains a pair of agents (SA-MCA) and EMA in the Main Container.
 
-| Number of containers 	| Execution time (ms) 	|
-|----------------------	|---------------------	|
-| 1                    	| 456                 	|
-| 2                    	| 1867                	|
-| 3                    	| 4189                	|
+| Number of containers 	| Execution time (ms) 	| Difference (ms) |
+|----------------------	|---------------------	| --------------- |
+| 1                    	| 456                 	| -14             |
+| 2                    	| 1867                	| 0               |
+| 3                    	| 4189                	| -166            |
 
 
 ### B) Varying message size (M)
 
 We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The number of messages sent by each SA was 50.
 
-| Message Size (M) 	| Execution time (ms) 	|
-|------------------	|---------------------	|
-| 10               	| 1611                	|
-| 50               	| 1924                	|
-| 100              	| 2386                	|
+| Message Size (M) 	| Execution time (ms) 	| Difference (ms) |
+|------------------	|---------------------	| --------------- |
+| 10               	| 1611                	| +34             |
+| 50               	| 1924                	| -60             |
+| 100              	| 2386                	| -30             |
 
 
 ### C) Varying number of messages sent by SA's (N)
 
 We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The message size was 300 ASCII characters.
 
-| Number of messages (N) 	| Execution time (ms) 	|
-|------------------------	|---------------------	|
-| 10                     	| 868                 	|
-| 50                     	| 4304                	|
-| 100                    	| 8551                	|
+| Number of messages (N) 	| Execution time (ms) 	| Difference (ms) |
+|------------------------	|---------------------	| --------------- |
+| 10                     	| 868                 	| -36             |
+| 50                     	| 4304                	| -48             |
+| 100                    	| 8551                	| -94             |
 
 ## Conclusions
 
@@ -124,7 +124,7 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 #### Part 2
 
-- Looking for the messages of an specific SA before processing the rest of messages doesn't seem to vary the execution time. 
+- Looking for the messages of an specific SA before processing the rest of messages doesn't seem to vary the execution time, at least with the amount of messages and sizes that we tested. 
 
 ## References
 
