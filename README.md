@@ -21,7 +21,20 @@ The scenario is designed to flood the system with messages. It has three types o
 
 ### Part 1
 
-### Varying message size (M)
+### A) Varying number of containers
+We run the experiment sending 50 messages of 300 ASCII characters. Each container contains a pair of agents (SA-MCA).
+
+| Number of containers 	| Execution time (ms) 	|
+|----------------------	|---------------------	|
+| 1                    	| 470                 	|
+| 2                    	| 1867                	|
+| 3                    	| 4355                	|
+| 4                    	| 7753                	|
+| 5                    	| 12067               	|
+| 6                    	| 17862               	|
+
+
+### B) Varying message size (M)
 
 We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The number of messages sent by each SA was 50.
 
@@ -35,7 +48,7 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 | 5000             	| 49241               	|
 
 
-### Varying number of messages sent by SA's (N)
+### C) Varying number of messages sent by SA's (N)
 
 We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The message size was 300 ASCII characters.
 
