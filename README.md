@@ -34,14 +34,14 @@ Three types of tests were performed, each one modifying one variable.
 ### A) Varying number of containers
 We run the experiment sending 50 messages of 300 ASCII characters. Each container contains a pair of agents (SA-MCA) and EMA in the Main Container.
 
-| Number of containers 	| Execution time (ms) 	|
-|----------------------	|---------------------	|
-| 1                    	| 470                 	|
-| 2                    	| 1867                	|
-| 3                    	| 4355                	|
-| 4                    	| 7753                	|
-| 5                    	| 12067               	|
-| 6                    	| 17862               	|
+| Number of containers 	| Execution time (ms) 	| Time per message (ms) |
+|----------------------	|---------------------	| --------------------- |
+| 1                    	| 470                 	| 10.51                 |
+| 2                    	| 1867                	| 13.23                 |
+| 3                    	| 4355                	| 16.10                 |
+| 4                    	| 7753                	| 41.39                 |
+| 5                    	| 12067               	| 73.58                 |
+| 6                    	| 17862               	| 328.27                |
 
 ![enter image description here](https://raw.githubusercontent.com/davidmigloz/spamming-scenario-agents/master/doc/img/1a.jpg)
 
@@ -49,14 +49,14 @@ We run the experiment sending 50 messages of 300 ASCII characters. Each containe
 
 We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The number of messages sent by each SA was 50.
 
-| Message Size (M) 	| Execution time (ms) 	|
-|------------------	|---------------------	|
-| 10               	| 1577                	|
-| 50               	| 1984                	|
-| 100              	| 2416                	|
-| 500              	| 6208                	|
-| 1000             	| 11037               	|
-| 5000             	| 49241               	|
+| Message Size (M) 	| Execution time (ms) 	| Time per message (ms) |
+|------------------	|---------------------	| --------------------- |
+| 10               	| 1577                	| 30.13                 |
+| 50               	| 1984                	| 29.01                 |
+| 100              	| 2416                	| 57.63                 |
+| 500              	| 6208                	| 287.17                |
+| 1000             	| 11037               	| 572.48                |
+| 5000             	| 49241               	| 2850.53               |
 
 ![enter image description here](https://github.com/davidmigloz/spamming-scenario-agents/blob/master/doc/img/1b.jpg)
 
@@ -64,14 +64,14 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 We run the experiment with 3 pairs of agents (SA-MCA) each one in a different container and EMA in the Main Container. The message size was 300 ASCII characters.
 
-| Number of messages (N) 	| Execution time (ms) 	|
-|------------------------	|---------------------	|
-| 10                     	| 904                 	|
-| 50                     	| 4352                	|
-| 100                    	| 8645                	|
-| 500                    	| 43075               	|
-| 1000                   	| 85873               	|
-| 5000                   	| 427583              	|
+| Number of messages (N) 	| Execution time (ms) 	| Time per message (ms) |
+|------------------------	|---------------------	| --------------------- |
+| 10                     	| 904                 	| 30.13                 |
+| 50                     	| 4352                	| 29.01                 |
+| 100                    	| 8645                	| 28.82                 |
+| 500                    	| 43075               	| 28.72                 |
+| 1000                   	| 85873               	| 28.62                 |
+| 5000                   	| 427583              	| 28.50                 |
 
 ![enter image description here](https://raw.githubusercontent.com/davidmigloz/spamming-scenario-agents/master/doc/img/1c.jpg)
 
