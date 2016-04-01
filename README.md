@@ -23,6 +23,7 @@ Remarks:
 - Each container hosts a pair of agents SA-MCA. 
 - EMA is located in the Main Container.
 - The processing of the message in our case it is just log it.
+- Time of message: time of sending, receiving and precessing a single message.
 
 ## Testing
 
