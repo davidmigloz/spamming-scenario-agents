@@ -25,7 +25,7 @@ EMA is located in the Main Container.
 ## Testing
 
 #### Environment
-The tests was performed in a Toshiba Satellite L850-150 laptop, with an Intel i7-3610 QM proccesor running at 2.30GHz and 8Gb of RAM.
+The tests was performed in a Toshiba Satellite L850-150 laptop, with an Intel i7-3610 QM processor running at 2.30GHz and 8Gb of RAM.
 
 ### Part 1
 
@@ -79,7 +79,7 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 In this second part, the way that Message Consuming Agent (MCA) consumes the messages was modified: 
 
-It looks for a message from a specific Spammer Agent (SA) first, and when there are none, it precesses the remaining messages in FIFO order.
+It looks for a message from a specific Spammer Agent (SA) first, and when there are none, it processes the remaining messages in FIFO order.
 
 We repeated the same tests with these modification, but giving priority to the messages of the `SA1`.
 
@@ -124,7 +124,7 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 #### Part 2
 
-- Looking for the messages of an specific SA before processing the rest of messages doesn't seem to vary the execution time, at least with the amount of messages and sizes that we tested. 
+- Looking for the messages of a specific SA before processing the rest of messages doesn't seem to vary the execution time, at least with the amount of messages and sizes that we tested. 
 
 #### General
 
