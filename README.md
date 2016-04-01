@@ -118,13 +118,17 @@ We run the experiment with 3 pairs of agents (SA-MCA) each one in a different co
 
 #### Part 1
 
-- Increasing the number of pairs SA-MCA in new containers increases the time per message in a linear way.
+- Increasing the number of pairs SA-MCA in new containers increases the time per message in a linear way. 
 - Increasing the size of the messages increases the time per message in a linear way.
 - Increasing the number of messages in the platform doesn't seem to affect the time per message.
 
 #### Part 2
 
 - Looking for the messages of an specific SA before processing the rest of messages doesn't seem to vary the execution time, at least with the amount of messages and sizes that we tested. 
+
+#### General
+
+- As we scale up the system the processing time increase no longer than in a linear way.
 
 ## References
 
