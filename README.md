@@ -18,9 +18,11 @@ The scenario is designed to flood the system with messages. It has three types o
 
 ![enter image description here](https://raw.githubusercontent.com/davidmigloz/spamming-scenario-agents/master/doc/img/scenario.jpg "Scenario")
 
-Each container hosts a pair of agents SA-MCA. 
+Remarks:
 
-EMA is located in the Main Container.
+- Each container hosts a pair of agents SA-MCA. 
+- EMA is located in the Main Container.
+- The processing of the message in our case it is just log it.
 
 ## Testing
 
